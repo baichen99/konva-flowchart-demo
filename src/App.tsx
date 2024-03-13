@@ -128,7 +128,7 @@ function App() {
       return {
         ...card,
         x: Math.random() * 800,
-        y: Math.random() * 800
+        y: Math.random() * 250
       }
     }))
   }
@@ -137,7 +137,7 @@ function App() {
       <Stage
         className={styles.stage}
         width={1000}
-        height={1000}
+        height={500}
         onMouseMove={handleDrawingMove}
         onClick={handleCloseDrawing}
       >
