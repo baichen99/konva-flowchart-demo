@@ -7,6 +7,5 @@ npm i
 npm run dev
 ```
 
-## Screenshots
+## Videos
 
-demo videos
