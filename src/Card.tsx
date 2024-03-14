@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Rect, Group, Text, Circle } from 'react-konva'
 
+
 export interface CardProps {
     id: string
     title: string
@@ -9,14 +10,16 @@ export interface CardProps {
     y: number
     width: number
     height: number
+    type: 'data' | 'network' | 'output'
     onDragMove?: (newX: number, newY: number) => void
     onStartDrawingArrow?: (cardId: string, x: number, y: number) => void
     onEndDrawingArrow?: (cardId: string, x: number, y: number) => void
+    onDelete?: (id: string) => void
 }
 
 
-const Card: React.FC<CardProps> = ({id, x, y, width, height, title, content, onDragMove, onStartDrawingArrow, onEndDrawingArrow}) => {
-    const portRadius = 10
+const Card: React.FC<CardProps> = React.memo(({type, id, x, y, width, height, title, content, onDragMove, onStartDrawingArrow, onEndDrawingArrow, onDelete}) => {
+    const portRadius = 5
     const inputPortX = portRadius
     const inputPortY = height / 2
     const outputPortX = width - portRadius
@@ -31,6 +34,7 @@ const Card: React.FC<CardProps> = ({id, x, y, width, height, title, content, onD
         console.log('click input port');
         onEndDrawingArrow && onEndDrawingArrow(id, inputPortX, inputPortY)
     }
+    
     return (
         <Group
             x={x}
@@ -59,7 +63,10 @@ const Card: React.FC<CardProps> = ({id, x, y, width, height, title, content, onD
                 y={0}
                 width={width}
                 height={height}
-                stroke={"1"}
+                stroke={
+                    type === 'data' ? 'green' :
+                    type === 'network' ? 'black' : 'purple'
+                }
             >
             </Rect>
             <Circle
@@ -78,8 +85,17 @@ const Card: React.FC<CardProps> = ({id, x, y, width, height, title, content, onD
                 fill='blue'
                 onClick={() => handleOutputPortClick(id)}
             />
+            {/* delete button */}
+            <Rect 
+                x={width - 20}
+                y={0}
+                width={20}
+                height={20}
+                fill='red'
+                onClick={() => onDelete && onDelete(id)}
+            />
         </Group>
     )
-}
+})
 
 export default Card

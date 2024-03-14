@@ -10,11 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/uuid": "^9.0.8",
     "css-module": "^1.1.4",
     "konva": "^9.3.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-konva": "^18.2.10"
+    "react-konva": "^18.2.10",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.64",
